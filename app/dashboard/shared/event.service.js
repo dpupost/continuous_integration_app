@@ -9,16 +9,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var event_item_model_1 = require("../event-item/event-item.model");
-var event_item_metrics_model_1 = require("../event-item-metrics/event-item-metrics.model");
+var event_item_model_1 = require('../event-item/event-item.model');
+var event_item_metrics_model_1 = require('../event-item-metrics/event-item-metrics.model');
+var Observable_1 = require('rxjs/Observable');
 var EventService = (function () {
     function EventService() {
     }
     EventService.prototype.getEvents = function () {
-        return eventsPromise;
+        return Observable_1.Observable.create(function (observer) {
+            observer.next(EVENTS);
+            observer.complete();
+        });
     };
     EventService.prototype.getMetrics = function (id) {
-        return metricsPromise.then(function (metrics) { return metrics.filter(function (metric) { return metric.eventId == id; })[0]; });
+        return Observable_1.Observable.create(function (observer) {
+            observer.next(METRICS.filter(function (metric) { return metric.eventId == id; })[0]);
+            observer.complete();
+        });
     };
     EventService = __decorate([
         core_1.Injectable(), 
@@ -47,6 +54,4 @@ var METRICS = [
     new event_item_metrics_model_1.EventItemMetricsModel(432457, 64, 73, 8, 87),
     new event_item_metrics_model_1.EventItemMetricsModel(432456, 44, 83, 1, 13),
 ];
-var eventsPromise = Promise.resolve(EVENTS);
-var metricsPromise = Promise.resolve(METRICS);
 //# sourceMappingURL=event.service.js.map

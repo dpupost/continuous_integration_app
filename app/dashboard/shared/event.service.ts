@@ -1,15 +1,22 @@
 import {Injectable} from '@angular/core';
-import {EventItemModel, EventStatus, EventType} from "../event-item/event-item.model";
-import {EventItemMetricsModel} from "../event-item-metrics/event-item-metrics.model";
+import {EventItemModel, EventStatus, EventType} from '../event-item/event-item.model';
+import {EventItemMetricsModel} from '../event-item-metrics/event-item-metrics.model';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class EventService {
-    getEvents(): Promise<EventItemModel[]> {
-        return eventsPromise;
+    getEvents(): Observable<EventItemModel[]> {
+        return Observable.create(observer => {
+            observer.next(EVENTS);
+            observer.complete();
+        });
     }
 
-    getMetrics(id: number): Promise<EventItemMetricsModel>{
-        return metricsPromise.then(metrics => metrics.filter(metric => metric.eventId == id)[0]);
+    getMetrics(id: number): Observable<EventItemMetricsModel>{
+        return Observable.create(observer => {
+            observer.next(METRICS.filter(metric => metric.eventId == id)[0]);
+            observer.complete();
+        });
     }
 }
 
@@ -35,5 +42,3 @@ var METRICS =[
     new EventItemMetricsModel(432456, 44, 83, 1, 13),
 ];
 
-var eventsPromise = Promise.resolve(EVENTS);
-var metricsPromise = Promise.resolve(METRICS);

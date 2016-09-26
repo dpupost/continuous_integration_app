@@ -16,7 +16,7 @@ var EventItemsList = (function () {
     }
     EventItemsList.prototype.getEvents = function () {
         var _this = this;
-        this._service.getEvents().then(function (events) { return _this.events = events; });
+        this._service.getEvents().subscribe(function (events) { return _this.events = events; });
     };
     EventItemsList.prototype.ngOnInit = function () {
         this.getEvents();
@@ -25,8 +25,8 @@ var EventItemsList = (function () {
         core_1.Component({
             selector: 'event-items-list',
             template: "\n        <div class=\"row\">\n            <div>Changelist / Build</div>\n            <div>Owner</div>\n            <div>Time Started</div>\n            <div>State</div>\n            <div>Metrics</div>\n            <div>Build</div>\n            <div>Unit Test</div>\n            <div>Functional Test</div>\n        </div>\n        \n        <div *ngFor=\"let eventItem of events\">\n            <event-item [event]=\"eventItem\">Loading...</event-item>\n        </div>\n       ",
-            //<event-item *ngFor="let eventItem of events" [event]="eventItem">Loading...</event-item>
-            providers: [event_service_1.EventService]
+            providers: [event_service_1.EventService],
+            styleUrls: ['/event-items-list.component.css']
         }), 
         __metadata('design:paramtypes', [event_service_1.EventService])
     ], EventItemsList);

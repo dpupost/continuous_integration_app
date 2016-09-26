@@ -16,8 +16,7 @@ var EventItemMetrics = (function () {
     }
     EventItemMetrics.prototype.getMetrics = function () {
         var _this = this;
-        this._service.getMetrics(this.eventId).then(function (metrics) { return _this.metrics = metrics; });
-        ;
+        this._service.getMetrics(this.eventId).subscribe(function (metrics) { return _this.metrics = metrics; });
     };
     EventItemMetrics.prototype.ngOnInit = function () {
         this.getMetrics();
@@ -29,9 +28,9 @@ var EventItemMetrics = (function () {
     EventItemMetrics = __decorate([
         core_1.Component({
             selector: 'event-item-metrics',
-            template: "\n        <div>\n            <div>{{metrics.test}}</div>\n            <div>{{metrics.maintainability}}</div>\n            <div>{{metrics.security}}</div>\n            <div>{{metrics.workmanship}}</div>\n        </div>\n        ",
+            template: "\n        <div class=\"metrics-container\">\n            <span class=\"metrics-container-title\">Metrics</span>\n            <div class=\"clear\"></div>\n            <div class=\"metrics-arrow-container\">\n                <div class='metrics-arrow up'>{{metrics.test}}</div>\n                <span>Test</span>\n            </div>\n            <div class=\"metrics-arrow-container\">\n                <div class='metrics-arrow down'>{{metrics.maintainability}}</div>\n                <span>Maintainability</span>\n            </div>\n            <div class=\"metrics-arrow-container\">\n                <div class='metrics-arrow right'>{{metrics.security}}</div>\n                <span>Security</span>\n            </div>\n            <div class=\"metrics-arrow-container\">\n                <div class='metrics-arrow right'>{{metrics.workmanship}}</div>\n                <span>Workmanship</span>\n            </div>\n            <div class=\"clear\"></div>\n        </div>\n        ",
             providers: [event_service_1.EventService],
-            styleUrls: ['app/dashboard/event-item-metrics/event-item-metrics.component.css']
+            styleUrls: ['./app/dashboard/event-item-metrics/event-item-metrics.component.css']
         }), 
         __metadata('design:paramtypes', [event_service_1.EventService])
     ], EventItemMetrics);
